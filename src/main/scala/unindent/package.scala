@@ -1,15 +1,15 @@
 import scala.language.experimental.macros
 
 package object unindent {
-  implicit class UnindentHelper(val ctx: StringContext) extends AnyVal {
-    def i(args: Any*): String = macro UnindentSyntax.unindentMacro
+  implicit class UnindentSyntax(val ctx: StringContext) extends AnyVal {
+    def i(args: Any*): String = macro UnindentMacros.unindentMacro
   }
 }
 
 package unindent {
   import scala.reflect.macros.blackbox.Context
 
-  class UnindentSyntax(val c: Context) {
+  class UnindentMacros(val c: Context) {
     import c.universe._
 
     private val prefixRegex = """^\n""".r
