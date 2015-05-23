@@ -28,5 +28,17 @@ println("[" + example + "]")
 
 See the [tests] for more examples.
 
+# Getting Started
+
+Grab the code from Bintray by adding the following to your `build.sbt`:
+
+~~~ scala
+scalaVersion := "2.11.6"
+
+resolvers += "Awesome Utilities" at "https://dl.bintray.com/davegurnell/maven"
+
+libraryDependencies += "com.davegurnell" %% "unindent" % "1.0"
+~~~
+
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [tests]: https://github.com/davegurnell/unindent/blob/master/src/test/scala/unindent/UnindentSpec.scala
