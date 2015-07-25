@@ -2,7 +2,7 @@ name := "unindent"
 
 organization := "com.davegurnell"
 
-version := "1.0"
+version := "1.0.0"
 
 licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
