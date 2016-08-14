@@ -15,8 +15,6 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
-sonatypeProfileName := "com.davegurnell"
-
 pomExtra in Global := {
   <url>https://github.com/davegurnell/unindent</url>
   <licenses>
