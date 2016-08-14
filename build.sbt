@@ -1,14 +1,9 @@
-name := "unindent"
-
+name         := "unindent"
 organization := "com.davegurnell"
+version      := "1.0.0"
+scalaVersion := "2.11.8"
 
-version := "1.0.0"
-
-scalaVersion := "2.11.6"
-
-initialCommands in console := """
-  |import unindent._
-""".trim.stripMargin
+licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
 libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-reflect" % scalaVersion.value,
@@ -17,12 +12,6 @@ libraryDependencies ++= Seq(
 
 pomExtra in Global := {
   <url>https://github.com/davegurnell/unindent</url>
-  <licenses>
-    <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
   <scm>
     <connection>scm:git:github.com/davegurnell/unindent</connection>
     <developerConnection>scm:git:git@github.com:davegurnell/unindent</developerConnection>
