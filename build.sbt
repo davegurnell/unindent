@@ -4,8 +4,6 @@ organization := "com.davegurnell"
 
 version := "1.0.0"
 
-licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
-
 scalaVersion := "2.11.6"
 
 initialCommands in console := """
@@ -17,6 +15,28 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
-bintrayPackageLabels in bintray := Seq("scala", "string", "utility")
+sonatypeProfileName := "com.davegurnell"
 
-bintrayRepository in bintray := "maven"
+pomExtra in Global := {
+  <url>https://github.com/davegurnell/unindent</url>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:github.com/davegurnell/unindent</connection>
+    <developerConnection>scm:git:git@github.com:davegurnell/unindent</developerConnection>
+    <url>github.com/davegurnell/unindent</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>davegurnell</id>
+      <name>Dave Gurnell</name>
+      <url>http://davegurnell.com</url>
+      <organization>Underscore</organization>
+      <organizationUrl>http://underscore.io</organizationUrl>
+    </developer>
+  </developers>
+}

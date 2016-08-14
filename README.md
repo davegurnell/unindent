@@ -33,11 +33,7 @@ See the [tests] for more examples.
 Grab the code from Bintray by adding the following to your `build.sbt`:
 
 ~~~ scala
-scalaVersion := "2.11.6"
-
-resolvers += "Awesome Utilities" at "https://dl.bintray.com/davegurnell/maven"
-
-libraryDependencies += "com.davegurnell" %% "unindent" % "1.0"
+libraryDependencies += "com.davegurnell" %% "unindent" % "1.0.0"
 ~~~
 
 [license]: http://www.apache.org/licenses/LICENSE-2.0
