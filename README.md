@@ -5,6 +5,7 @@ Indent-adjusted multiline string literals for Scala.
 Copyright 2015 Dave Gurnell. Licensed [Apache 2][license].
 
 [![Build Status](https://travis-ci.org/davegurnell/unindent.svg?branch=develop)](https://travis-ci.org/davegurnell/unindent)
+[![Coverage status](https://img.shields.io/codecov/c/github/davegurnell/unindent/develop.svg)](https://codecov.io/github/davegurnell/unindent)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.davegurnell/unindent_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.davegurnell/unindent_2.11)
 
 ## Getting Started
