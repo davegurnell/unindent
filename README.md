@@ -10,7 +10,7 @@ Copyright 2015 Dave Gurnell. Licensed [Apache 2][license].
 
 ## Getting Started
 
-Grab the code from Bintray by adding the following to your `build.sbt`:
+Add the following to your `build.sbt`:
 
 ~~~ scala
 libraryDependencies += "com.davegurnell" %% "unindent" % "<<VERSION>>"
