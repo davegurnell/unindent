@@ -1,22 +1,32 @@
-name := "unindent"
-
+name         := "unindent"
 organization := "com.davegurnell"
+version      := "1.1.0"
 
-version := "1.0.0"
+scalaOrganization  in ThisBuild := "org.typelevel"
+scalaVersion       in ThisBuild := "2.12.1"
+crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.1")
 
 licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.11.6"
-
-initialCommands in console := """
-  |import unindent._
-""".trim.stripMargin
-
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scala-lang"  % "scala-reflect" % scalaVersion.value,
+  "org.scalatest"  %% "scalatest"     % "3.0.1" % "test"
 )
 
-bintrayPackageLabels in bintray := Seq("scala", "string", "utility")
-
-bintrayRepository in bintray := "maven"
+pomExtra in Global := {
+  <url>https://github.com/davegurnell/unindent</url>
+  <scm>
+    <connection>scm:git:github.com/davegurnell/unindent</connection>
+    <developerConnection>scm:git:git@github.com:davegurnell/unindent</developerConnection>
+    <url>github.com/davegurnell/unindent</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>davegurnell</id>
+      <name>Dave Gurnell</name>
+      <url>http://davegurnell.com</url>
+      <organization>Underscore</organization>
+      <organizationUrl>http://underscore.io</organizationUrl>
+    </developer>
+  </developers>
+}
