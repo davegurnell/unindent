@@ -1,9 +1,10 @@
 name         := "unindent"
 organization := "com.davegurnell"
-version      := "1.1.0-SNAPSHOT"
-scalaVersion := "2.12.0"
+version      := "1.1.0"
 
-crossScalaVersions := Seq("2.11.8", "2.12.0")
+scalaOrganization  in ThisBuild := "org.typelevel"
+scalaVersion       in ThisBuild := "2.12.1"
+crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.1")
 
 licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
