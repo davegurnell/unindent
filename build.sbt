@@ -1,16 +1,15 @@
-name         := "unindent"
+name := "unindent"
 organization := "com.davegurnell"
-version      := "1.1.0"
+version := "1.1.1"
 
-scalaOrganization  in ThisBuild := "org.typelevel"
-scalaVersion       in ThisBuild := "2.12.1"
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.1")
+scalaVersion in ThisBuild := "2.13.0"
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.9", "2.13.0")
 
 licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
 libraryDependencies ++= Seq(
-  "org.scala-lang"  % "scala-reflect" % scalaVersion.value,
-  "org.scalatest"  %% "scalatest"     % "3.0.1" % "test"
+  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+  "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
 pomExtra in Global := {
