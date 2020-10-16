@@ -1,7 +1,21 @@
 organization in ThisBuild := "com.davegurnell"
+
 name in ThisBuild := "unindent"
+
 scalaVersion in ThisBuild := "2.13.3"
+
 crossScalaVersions in ThisBuild := Seq("2.12.12", "2.13.3")
+
+scalacOptions ++= Seq(
+  "-feature",
+  "-unchecked",
+  "-deprecation"
+)
+
+libraryDependencies ++= Seq(
+  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+  "org.scalatest"  %% "scalatest"    % "3.0.8" % Test
+)
 
 // Versioning
 
@@ -32,29 +46,18 @@ usePgpKeyHex("7888516955DFB3F8")
 pgpPublicRing := file("./travis/local.pubring.asc")
 pgpSecretRing := file("./travis/local.secring.asc")
 
-licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
+licenses in ThisBuild += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
-scalacOptions ++= Seq(
-  "-feature",
-  "-unchecked",
-  "-deprecation"
-)
+homepage in ThisBuild := Some(url("https://github.com/davegurnell/unindent"))
 
-libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-  "org.scalatest"  %% "scalatest"    % "3.0.8" % Test
-)
-
-homepage := Some(url("https://github.com/davegurnell/unindent"))
-
-scmInfo := Some(
+scmInfo in ThisBuild := Some(
   ScmInfo(
     url("https://github.com/davegurnell/unindent.git"),
     "scm:git@github.com:davegurnell/unindent.git"
   )
 )
 
-developers := List(
+developers in ThisBuild := List(
   Developer(
     id = "davegurnell",
     name = "Dave Gurnell",
