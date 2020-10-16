@@ -19,14 +19,6 @@ git.useGitDescribe := true
 // Put "-SNAPSHOT" on a commit if it's not a tag:
 git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
 
-// This is what release tags look like:
-val ReleaseTag = """^([\d\.]+)$""".r
-
-git.gitTagToVersionNumber := {
-  case ReleaseTag(v) => Some(v)
-  case _             => None
-}
-
 // Publishing
 
 publishMavenStyle := true
