@@ -9,7 +9,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
         i"""This is an indented multi-line string.
         This line ends up unindented.
           This line ends up indented by two spaces."""
-      ) must equal (
+      ) must equal(
         s"""This is an indented multi-line string.
         |This line ends up unindented.
         |  This line ends up indented by two spaces.
@@ -24,7 +24,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
         This line ends up unindented.
           This line ends up indented by two spaces.
         """
-      ) must equal (
+      ) must equal(
         s"""This is an indented multi-line string.
         |This line ends up unindented.
         |  This line ends up indented by two spaces.
@@ -41,7 +41,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
           This line ends up indented by two spaces.
 
         """
-      ) must equal (
+      ) must equal(
         s"""
         |
         |This is an indented multi-line string.
