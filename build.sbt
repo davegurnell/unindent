@@ -1,96 +1,98 @@
-organization in ThisBuild := "com.davegurnell"
+organization := "com.davegurnell"
 
-name in ThisBuild := "unindent"
+name := "unindent"
 
-scalaVersion in ThisBuild := "2.13.3"
+scalaVersion := "3.0.0-RC1"
 
-crossScalaVersions in ThisBuild := Seq("2.12.12", "2.13.3")
+crossScalaVersions := Seq("2.12.12", "2.13.3")
 
 scalacOptions ++= Seq(
   "-feature",
   "-unchecked",
-  "-deprecation"
+  "-deprecation",
+  "-rewrite",
+  "-new-syntax"
 )
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-  "org.scalatest"  %% "scalatest"    % "3.0.8" % Test
+  // "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+  "org.scalatest" %% "scalatest" % "3.2.4" % Test
 )
 
-// Versioning
+// // Versioning
 
-// A lot of the versioning, publishing, and Travis-related code below is adapted from:
-//
-//   - https://alexn.org/blog/2017/08/16/automatic-releases-sbt-travis.html
-//   - http://caryrobbins.com/dev/sbt-publishing/
+// // A lot of the versioning, publishing, and Travis-related code below is adapted from:
+// //
+// //   - https://alexn.org/blog/2017/08/16/automatic-releases-sbt-travis.html
+// //   - http://caryrobbins.com/dev/sbt-publishing/
 
-enablePlugins(GitVersioning)
-enablePlugins(GitBranchPrompt)
+// enablePlugins(GitVersioning)
+// enablePlugins(GitBranchPrompt)
 
-// Use "1.2.3-4-aabbccdde-SNAPSHOT" versnining:
-git.useGitDescribe := true
+// // Use "1.2.3-4-aabbccdde-SNAPSHOT" versnining:
+// git.useGitDescribe := true
 
-// Put "-SNAPSHOT" on a commit if it's not a tag:
-git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
+// // Put "-SNAPSHOT" on a commit if it's not a tag:
+// git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
 
-// Publishing
+// // Publishing
 
-publishMavenStyle := true
+// publishMavenStyle := true
 
-isSnapshot := version.value.endsWith("SNAPSHOT")
+// isSnapshot := version.value.endsWith("SNAPSHOT")
 
-publishTo in ThisBuild := sonatypePublishTo.value
+// publishTo in ThisBuild := sonatypePublishTo.value
 
-usePgpKeyHex("7888516955DFB3F8")
+// usePgpKeyHex("7888516955DFB3F8")
 
-pgpPublicRing := file("./travis/local.pubring.asc")
-pgpSecretRing := file("./travis/local.secring.asc")
+// pgpPublicRing := file("./travis/local.pubring.asc")
+// pgpSecretRing := file("./travis/local.secring.asc")
 
-licenses in ThisBuild += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
+// licenses in ThisBuild += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
-homepage in ThisBuild := Some(url("https://github.com/davegurnell/unindent"))
+// homepage in ThisBuild := Some(url("https://github.com/davegurnell/unindent"))
 
-scmInfo in ThisBuild := Some(
-  ScmInfo(
-    url("https://github.com/davegurnell/unindent.git"),
-    "scm:git@github.com:davegurnell/unindent.git"
-  )
-)
+// scmInfo in ThisBuild := Some(
+//   ScmInfo(
+//     url("https://github.com/davegurnell/unindent.git"),
+//     "scm:git@github.com:davegurnell/unindent.git"
+//   )
+// )
 
-developers in ThisBuild := List(
-  Developer(
-    id = "davegurnell",
-    name = "Dave Gurnell",
-    email = "dave@underscore.io",
-    url = url("https://twitter.com/davegurnell")
-  )
-)
+// developers in ThisBuild := List(
+//   Developer(
+//     id = "davegurnell",
+//     name = "Dave Gurnell",
+//     email = "dave@underscore.io",
+//     url = url("https://twitter.com/davegurnell")
+//   )
+// )
 
-// Travis
+// // Travis
 
-// Sonatype credentials are on Travis in a secret:
-credentials ++= {
-  val travisCredentials = for {
-    user <- sys.env.get("SONATYPE_USER")
-    pass <- sys.env.get("SONATYPE_PASS")
-  } yield Credentials(
-    "Sonatype Nexus Repository Manager",
-    "oss.sonatype.org",
-    user,
-    pass
-  )
+// // Sonatype credentials are on Travis in a secret:
+// credentials ++= {
+//   val travisCredentials = for {
+//     user <- sys.env.get("SONATYPE_USER")
+//     pass <- sys.env.get("SONATYPE_PASS")
+//   } yield Credentials(
+//     "Sonatype Nexus Repository Manager",
+//     "oss.sonatype.org",
+//     user,
+//     pass
+//   )
 
-  travisCredentials.toSeq
-}
+//   travisCredentials.toSeq
+// }
 
-// Password to the PGP certificate is on Travis in a secret:
-pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
+// // Password to the PGP certificate is on Travis in a secret:
+// pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
 
-// Command Aliases
+// // Command Aliases
 
-addCommandAlias("ci", ";clean ;coverage ;compile ;test ;coverageReport")
-addCommandAlias("release", ";+publishSigned ;sonatypeReleaseAll")
+// addCommandAlias("ci", ";clean ;coverage ;compile ;test ;coverageReport")
+// addCommandAlias("release", ";+publishSigned ;sonatypeReleaseAll")
 
-// Formatting
+// // Formatting
 
-scalafmtOnCompile := true
+// scalafmtOnCompile := true

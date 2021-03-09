@@ -15,6 +15,7 @@ local.*
 .bloop
 .metals
 .idea
+.bsp
 
 # sbt specific
 .cache
