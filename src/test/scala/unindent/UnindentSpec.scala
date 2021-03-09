@@ -1,11 +1,11 @@
 package unindent
 
-import org.scalatest.freespec.*
+import org.scalatest.wordspec.*
 import org.scalatest.matchers.should.*
 
-class UnindentSpec extends AnyFreeSpec, Matchers {
-  "i-strings" - {
-    "are unindented automatically" in {
+class UnindentSpec extends AnyWordSpec, Matchers:
+  "i-strings" should {
+    "be unindented automatically" in {
       (
         i"""This is an indented multi-line string.
         This line ends up unindented.
@@ -18,7 +18,7 @@ class UnindentSpec extends AnyFreeSpec, Matchers {
       )
     }
 
-    "are stripped of initial and final line breaks" in {
+    "be stripped of initial and final line breaks" in {
       (
         i"""
         This is an indented multi-line string.
@@ -33,7 +33,7 @@ class UnindentSpec extends AnyFreeSpec, Matchers {
       )
     }
 
-    "are not stripped of double initial and final line breaks" in {
+    "not be stripped of double initial and final line breaks" in {
       (
         i"""
 
@@ -69,7 +69,7 @@ class UnindentSpec extends AnyFreeSpec, Matchers {
       )
     }
 
-    "handle corner cases" - {
+    "handle corner cases" should {
       "empty string" in {
         i"" shouldBe (s"")
       }
@@ -79,4 +79,3 @@ class UnindentSpec extends AnyFreeSpec, Matchers {
       }
     }
   }
-}
