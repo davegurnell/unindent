@@ -1,15 +1,16 @@
 package unindent
 
-import org.scalatest._
+import org.scalatest.freespec.*
+import org.scalatest.matchers.should.*
 
-class UnindentSpec extends FreeSpec with MustMatchers {
+class UnindentSpec extends AnyFreeSpec, Matchers {
   "i-strings" - {
     "are unindented automatically" in {
       (
         i"""This is an indented multi-line string.
         This line ends up unindented.
           This line ends up indented by two spaces."""
-      ) must equal(
+      ) shouldBe (
         s"""This is an indented multi-line string.
         |This line ends up unindented.
         |  This line ends up indented by two spaces.
@@ -24,7 +25,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
         This line ends up unindented.
           This line ends up indented by two spaces.
         """
-      ) must equal(
+      ) shouldBe (
         s"""This is an indented multi-line string.
         |This line ends up unindented.
         |  This line ends up indented by two spaces.
@@ -41,7 +42,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
           This line ends up indented by two spaces.
 
         """
-      ) must equal(
+      ) shouldBe (
         s"""
         |
         |This is an indented multi-line string.
@@ -59,7 +60,7 @@ class UnindentSpec extends FreeSpec with MustMatchers {
           ${2 + 2} that's one too
         This one is in the ${3 + 3} middle of a line
         """
-      ) must equal(
+      ) shouldBe (
         s"""
         |This is an intepolated bit 2
         |  4 that's one too
@@ -70,11 +71,11 @@ class UnindentSpec extends FreeSpec with MustMatchers {
 
     "handle corner cases" - {
       "empty string" in {
-        i"" must equal(s"")
+        i"" shouldBe (s"")
       }
 
       "solitary interpolation" in {
-        i"${1 + 1}" must equal(s"2")
+        i"${1 + 1}" shouldBe (s"2")
       }
     }
   }
