@@ -1,12 +1,10 @@
-organization := "com.davegurnell"
+ThisBuild / organization := "com.davegurnell"
+ThisBuild / name := "unindent"
+ThisBuild / scalaVersion := "3.0.0-RC1"
 
-name := "unindent"
+ThisBuild / crossScalaVersions := Seq("3.0.0-RC1")
 
-scalaVersion := "3.0.0-RC1"
-
-crossScalaVersions := Seq("3.0.0-RC1")
-
-scalacOptions ++= Seq(
+ThisBuild / scalacOptions ++= Seq(
   "-feature",
   "-unchecked",
   "-deprecation",
@@ -14,11 +12,9 @@ scalacOptions ++= Seq(
   "-new-syntax"
 )
 
-libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.2.4" % Test
-)
+ThisBuild / libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.4" % Test)
 
-// Versioning
+// Versioning -----------------------------------
 
 // A lot of the versioning, publishing, and Travis-related code below is adapted from:
 //
@@ -33,6 +29,8 @@ git.useGitDescribe := true
 
 // Put "-SNAPSHOT" on a commit if it's not a tag:
 git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
+
+// Github Actions -------------------------------
 
 ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
