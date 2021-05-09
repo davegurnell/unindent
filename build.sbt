@@ -34,6 +34,9 @@ git.useGitDescribe := true
 // Put "-SNAPSHOT" on a commit if it's not a tag:
 git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
 
+ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
 // Publishing
 
 // publishMavenStyle := true
