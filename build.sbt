@@ -1,5 +1,15 @@
-ThisBuild / organization := "com.davegurnell"
-ThisBuild / name := "unindent"
+enablePlugins(GitVersioning)
+enablePlugins(GitBranchPrompt)
+
+// Basic settings -------------------------------
+
+organization := "com.davegurnell"
+name := "unindent"
+
+// Versioning
+git.useGitDescribe := true // Use "1.2.3-4-aabbccdde-SNAPSHOT" versioning
+git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT" on a commit if it's not a tag
+
 ThisBuild / scalaVersion := "3.0.0-RC1"
 
 ThisBuild / crossScalaVersions := Seq("3.0.0-RC1")
@@ -13,22 +23,6 @@ ThisBuild / scalacOptions ++= Seq(
 )
 
 ThisBuild / libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.4" % Test)
-
-// Versioning -----------------------------------
-
-// A lot of the versioning, publishing, and Travis-related code below is adapted from:
-//
-//   - https://alexn.org/blog/2017/08/16/automatic-releases-sbt-travis.html
-//   - http://caryrobbins.com/dev/sbt-publishing/
-
-enablePlugins(GitVersioning)
-enablePlugins(GitBranchPrompt)
-
-// Use "1.2.3-4-aabbccdde-SNAPSHOT" versnining:
-git.useGitDescribe := true
-
-// Put "-SNAPSHOT" on a commit if it's not a tag:
-git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty
 
 // Github Actions -------------------------------
 
