@@ -45,3 +45,23 @@ ThisBuild / githubWorkflowPublish := Seq(
     )
   )
 )
+
+ThisBuild / licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
+
+ThisBuild / homepage := Some(url("https://github.com/davegurnell/unindent"))
+
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/davegurnell/unindent.git"),
+    "scm:git@github.com:davegurnell/unindent.git"
+  )
+)
+
+ThisBuild / developers := List(
+  Developer(
+    id = "davegurnell",
+    name = "Dave Gurnell",
+    email = "dave@underscore.io",
+    url = url("https://twitter.com/davegurnell")
+  )
+)
