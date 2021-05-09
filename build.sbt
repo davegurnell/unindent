@@ -27,66 +27,21 @@ ThisBuild / libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.4"
 // Github Actions -------------------------------
 
 ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
-ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-// Publishing
+// Publishing -----------------------------------
 
-// publishMavenStyle := true
+ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 
-// isSnapshot := version.value.endsWith("SNAPSHOT")
+ThisBuild / githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v")))
 
-// publishTo in ThisBuild := sonatypePublishTo.value
-
-// usePgpKeyHex("7888516955DFB3F8")
-
-// pgpPublicRing := file("./travis/local.pubring.asc")
-// pgpSecretRing := file("./travis/local.secring.asc")
-
-// licenses in ThisBuild += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
-
-// homepage in ThisBuild := Some(url("https://github.com/davegurnell/unindent"))
-
-// scmInfo in ThisBuild := Some(
-//   ScmInfo(
-//     url("https://github.com/davegurnell/unindent.git"),
-//     "scm:git@github.com:davegurnell/unindent.git"
-//   )
-// )
-
-// developers in ThisBuild := List(
-//   Developer(
-//     id = "davegurnell",
-//     name = "Dave Gurnell",
-//     email = "dave@underscore.io",
-//     url = url("https://twitter.com/davegurnell")
-//   )
-// )
-
-// // Travis
-
-// // Sonatype credentials are on Travis in a secret:
-// credentials ++= {
-//   val travisCredentials = for {
-//     user <- sys.env.get("SONATYPE_USER")
-//     pass <- sys.env.get("SONATYPE_PASS")
-//   } yield Credentials(
-//     "Sonatype Nexus Repository Manager",
-//     "oss.sonatype.org",
-//     user,
-//     pass
-//   )
-
-//   travisCredentials.toSeq
-// }
-
-// // Password to the PGP certificate is on Travis in a secret:
-// pgpPassphrase := sys.env.get("PGP_PASS").map(_.toArray)
-
-// // Command Aliases
-
-// addCommandAlias("ci", ";clean ;coverage ;compile ;test ;coverageReport")
-// addCommandAlias("release", ";+publishSigned ;sonatypeReleaseAll")
-
-// // Formatting
-
-// // scalafmtOnCompile := true
+ThisBuild / githubWorkflowPublish := Seq(
+  WorkflowStep.Sbt(
+    List("ci-release"),
+    env = Map(
+      "PGP_PASSPHRASE"    -> "${{ secrets.PGP_PASSPHRASE }}",
+      "PGP_SECRET"        -> "${{ secrets.PGP_SECRET }}",
+      "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+      "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
+    )
+  )
+)
