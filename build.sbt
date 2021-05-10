@@ -7,28 +7,51 @@ organization := "com.davegurnell"
 name := "unindent"
 
 // Versioning
-git.useGitDescribe := true // Use "1.2.3-4-aabbccdde-SNAPSHOT" versioning
 git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT" on a commit if it's not a tag
 
-ThisBuild / scalaVersion := "3.0.0-RC1"
+ThisBuild / scalaVersion := "3.0.0-RC2"
 
-ThisBuild / crossScalaVersions := Seq("3.0.0-RC1")
+ThisBuild / crossScalaVersions := Seq("3.0.0-RC2", "2.13.5")
 
-ThisBuild / scalacOptions ++= Seq(
-  "-feature",
-  "-unchecked",
-  "-deprecation",
-  "-rewrite",
-  "-new-syntax"
-)
+ThisBuild / scalacOptions ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, 13)) =>
+      Seq(
+        "-feature",
+        "-unchecked",
+        "-deprecation",
+      )
 
-ThisBuild / libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.4" % Test)
+    case _ =>
+      Seq(
+        "-feature",
+        "-unchecked",
+        "-deprecation",
+        "-rewrite",
+        "-new-syntax",
+      )
+  }
+}
+
+ThisBuild / libraryDependencies ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, 13)) =>
+      Seq(
+        "org.scalameta"  %% "munit"        % "0.7.25" % Test,
+        "org.scala-lang" % "scala-reflect" % scalaVersion.value
+      )
+    case _ =>
+      Seq("org.scalameta" %% "munit" % "0.7.25" % Test)
+  }
+}
 
 // Github Actions -------------------------------
 
 ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
 
 // Publishing -----------------------------------
+
+ThisBuild / versionScheme := Some("early-semver")
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 
