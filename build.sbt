@@ -11,11 +11,11 @@ git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT"
 
 ThisBuild / scalaVersion := "3.0.0-RC2"
 
-ThisBuild / crossScalaVersions := Seq("3.0.0-RC2", "2.13.5")
+ThisBuild / crossScalaVersions := Seq("3.0.0-RC2", "2.13.5", "2.12.13")
 
 ThisBuild / scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, 13)) =>
+    case Some((2, _)) =>
       Seq(
         "-feature",
         "-unchecked",
@@ -35,7 +35,7 @@ ThisBuild / scalacOptions ++= {
 
 ThisBuild / libraryDependencies ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, 13)) =>
+    case Some((2, _)) =>
       Seq(
         "org.scalameta"  %% "munit"        % "0.7.25" % Test,
         "org.scala-lang" % "scala-reflect" % scalaVersion.value
@@ -68,6 +68,8 @@ ThisBuild / githubWorkflowPublish := Seq(
     )
   )
 )
+
+usePgpKeyHex("7888516955DFB3F8")
 
 ThisBuild / licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
