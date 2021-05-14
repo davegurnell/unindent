@@ -12,8 +12,8 @@ class UnindentMacros(val c: Context) {
   def unindentMacro(args: c.Tree*): c.Tree =
     c.prefix.tree match {
       case Apply(_, List(Apply(_, partTrees))) =>
-        val parts = transform(partTrees.map {
-          case Literal(Constant(part: String)) => part
+        val parts = transform(partTrees.map { case Literal(Constant(part: String)) =>
+          part
         })
 
         q"_root_.scala.StringContext(..$parts).s(..$args)"
@@ -28,22 +28,21 @@ class UnindentMacros(val c: Context) {
 
     val minIndent = parts.flatMap(indentRegex.findAllIn(_)).map(_.length).foldLeft(Int.MaxValue)(math.min)
 
-    parts.zipWithIndex.map {
-      case (part, index) =>
-        // De-indent newlines:
-        var ans = indentRegex.replaceAllIn(part, (m: Match) => "\n" + (" " * (m.group(0).length - minIndent)))
+    parts.zipWithIndex.map { case (part, index) =>
+      // De-indent newlines:
+      var ans = indentRegex.replaceAllIn(part, (m: Match) => "\n" + (" " * (m.group(0).length - minIndent)))
 
-        // Strip any initial newline from the beginning of the string:
-        if (index == 0) {
-          ans = prefixRegex.replaceFirstIn(ans, "")
-        }
+      // Strip any initial newline from the beginning of the string:
+      if (index == 0) {
+        ans = prefixRegex.replaceFirstIn(ans, "")
+      }
 
-        // Strip any final newline from the end of the string:
-        if (index == numParts - 1) {
-          ans = suffixRegex.replaceFirstIn(ans, "")
-        }
+      // Strip any final newline from the end of the string:
+      if (index == numParts - 1) {
+        ans = suffixRegex.replaceFirstIn(ans, "")
+      }
 
-        ans
+      ans
     }
   }
 }
