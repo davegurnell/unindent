@@ -9,9 +9,9 @@ name := "unindent"
 // Versioning
 git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT" on a commit if it's not a tag
 
-ThisBuild / scalaVersion := "3.0.0-RC2"
+ThisBuild / scalaVersion := "3.0.0"
 
-ThisBuild / crossScalaVersions := Seq("3.0.0-RC2", "2.13.5", "2.12.13")
+ThisBuild / crossScalaVersions := Seq("3.0.0", "2.13.5", "2.12.13")
 
 ThisBuild / scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
