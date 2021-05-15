@@ -6,9 +6,6 @@ enablePlugins(GitBranchPrompt)
 organization := "com.davegurnell"
 name := "unindent"
 
-// Versioning
-git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT" on a commit if it's not a tag
-
 ThisBuild / scalaVersion := "3.0.0"
 
 ThisBuild / crossScalaVersions := Seq("3.0.0", "2.13.5", "2.12.13")
@@ -45,11 +42,19 @@ ThisBuild / libraryDependencies ++= {
   }
 }
 
+// Versioning -----------------------------------
+
+ThisBuild / versionScheme := Some("early-semver")
+
+git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT" on a commit if it's not a tag
+
 // Github Actions -------------------------------
 
 ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
 
 // Publishing -----------------------------------
+
+usePgpKeyHex("7888516955DFB3F8")
 
 ThisBuild / versionScheme := Some("early-semver")
 
@@ -68,8 +73,6 @@ ThisBuild / githubWorkflowPublish := Seq(
     )
   )
 )
-
-usePgpKeyHex("7888516955DFB3F8")
 
 ThisBuild / licenses += ("Apache-2.0", url("http://apache.org/licenses/LICENSE-2.0"))
 
