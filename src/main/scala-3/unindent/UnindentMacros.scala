@@ -1,11 +1,12 @@
 package unindent
 
 import scala.quoted.*
+import scala.util.matching.Regex
 
 object UnindentMacros:
-  val prefixRegex = """^\n""".r
-  val suffixRegex = """\n[ \t]*$""".r
-  val indentRegex = """\n[ \t]+""".r
+  private val prefixRegex = """^\n""".r
+  private val suffixRegex = """\n[ \t]*$""".r
+  private val indentRegex = """\n[ \t]+""".r
 
   def unindentMacro(ctx: Expr[StringContext], args: Expr[Seq[Any]])(using Quotes): Expr[String] =
     val indentedStrings: Seq[String] =
@@ -24,22 +25,20 @@ object UnindentMacros:
         .foldLeft(Int.MaxValue)(math.min)
 
     val unindentedStrings: Seq[String] =
-      indentedStrings.zipWithIndex.map {
-        case (part, index) =>
-          import scala.util.matching.Regex.Match
+      indentedStrings.zipWithIndex.map { case (part, index) =>
+        // De-indent newlines:
+        var ans = indentRegex
+          .replaceAllIn(part, (m: Regex.Match) => "\n" + (" " * (m.group(0).length - minIndent)))
 
-          // De-indent newlines:
-          var ans = indentRegex.replaceAllIn(part, (m: Match) => "\n" + (" " * (m.group(0).length - minIndent)))
+        // Strip any initial newline from the beginning of the string:
+        if index == 0 then
+          ans = prefixRegex.replaceFirstIn(ans, "")
 
-          // Strip any initial newline from the beginning of the string:
-          if index == 0 then
-            ans = prefixRegex.replaceFirstIn(ans, "")
+        // Strip any final newline from the end of the string:
+        if index == numIndentedStrings - 1 then
+          ans = suffixRegex.replaceFirstIn(ans, "")
 
-          // Strip any final newline from the end of the string:
-          if index == numIndentedStrings - 1 then
-            ans = suffixRegex.replaceFirstIn(ans, "")
-
-          ans
+        ans
       }
 
     val unindentedExprs: Seq[Expr[String]] =
