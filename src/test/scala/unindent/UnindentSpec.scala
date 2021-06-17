@@ -85,7 +85,7 @@ class UnindentSpec extends munit.FunSuite {
 class FoldedUnindentSpec extends munit.FunSuite {
   test("folded unindent automatically") {
     val actual =
-      y"""This is a multi-line string.
+      i1"""This is a multi-line string.
       This line is concated to the previous.
 
       This line begins with a newline.
@@ -101,7 +101,7 @@ class FoldedUnindentSpec extends munit.FunSuite {
 
   test("strip initial and final line breaks") {
     val actual =
-      y"""
+      i1"""
       This is an indented multi-line string.
 
       This line ends up unindented.
@@ -120,7 +120,7 @@ class FoldedUnindentSpec extends munit.FunSuite {
 
   test("don't strip off double initial and final line breaks") {
     val actual =
-      y"""
+      i1"""
 
       This is an indented multi-line string.
 
@@ -144,7 +144,7 @@ class FoldedUnindentSpec extends munit.FunSuite {
 
   test("allow interpolation") {
     val actual =
-      y"""
+      i1"""
       This is an intepolated bit ${1 + 1}
         ${2 + 2} that's one too
 
@@ -161,10 +161,10 @@ class FoldedUnindentSpec extends munit.FunSuite {
   }
 
   test("corner case - empty string") {
-    assert(y"" == s"")
+    assert(i1"" == s"")
   }
 
   test("corner case - solitary interpolation") {
-    assert(y"${1 + 1}" == s"2")
+    assert(i1"${1 + 1}" == s"2")
   }
 }
