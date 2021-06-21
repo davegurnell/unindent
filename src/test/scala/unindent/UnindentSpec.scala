@@ -83,9 +83,6 @@ class UnindentSpec extends munit.FunSuite {
 }
 
 class FoldedUnindentSpec extends munit.FunSuite {
-  def dump(input: String): String =
-    input.map(c => Integer.toHexString(c.toInt)).mkString(" ")
-
   test("folded unindent automatically") {
     val actual =
       i1"""
@@ -99,11 +96,6 @@ class FoldedUnindentSpec extends munit.FunSuite {
       s"""This is a multi-line string. This line is appended to the previous.
       |This line begins with a newline.   This line is prefixed by three spaces.
       """.trim.stripMargin
-
-    println(dump(actual))
-    println("")
-    println(dump(expected))
-    println(actual == expected)
 
     assert(actual == expected)
   }
