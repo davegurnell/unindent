@@ -18,7 +18,9 @@ libraryDependencies += "com.davegurnell" %% "unindent" % "<<VERSION>>"
 
 ## Synopsis
 
-Unindent's `i"..."` string interpolator is like Scala's `s"..."` interpolator, except it removes the indent applied in the source file. The behaviour is very similar to Coffeescript's multiline string literals.
+Unindent provides two new string interpolators for indented strings: `i"..."` and `i1"..."`:
+
+The `i"..."` interpolator is like Scala's `s"..."`, except it removes the indent applied in the source file. The behaviour is similar to Coffeescript's [multiline string literals][coffeescript-multiline]:
 
 ```scala
 import unindent._
@@ -38,7 +40,28 @@ println("[" + example + "]")
 // It supports interpolation too: 2.]
 ```
 
+The `i1"..."` interpolator (added un Unindent 1.7) is like `i"..."`, except it folds "paragraphs" of text into single lines. The behaviour is similar to [YAML's folded multiline strings][yaml-multiline]:
+
+```scala
+import unindent._
+
+val example =
+  i1"""
+  This is the first line.
+  This line is appended to the first.
+
+  This line follows a line break.
+    This line ends up indented by two spaces.
+  """
+
+println("[" + example + "]")
+// [This is the first line. This line is appended to the first.
+// This line follows a line break.   This line ends up indented by two spaces.]
+```
+
 See the [tests] for more examples.
 
 [license]: http://www.apache.org/licenses/LICENSE-2.0
 [tests]: https://github.com/davegurnell/unindent/blob/master/src/test/scala/unindent/UnindentSpec.scala
+[coffeescript-multiline]: https://coffeescript.org/#strings
+[yaml-multiline]: https://yaml.org/spec/1.2/spec.html#id2796251

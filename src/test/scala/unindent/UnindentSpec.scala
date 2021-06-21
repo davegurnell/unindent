@@ -86,7 +86,7 @@ class FoldedUnindentSpec extends munit.FunSuite {
   test("folded unindent automatically") {
     val actual =
       i1"""This is a multi-line string.
-      This line is concated to the previous.
+      This line is appended to the previous.
 
       This line begins with a newline.
         This line is prefixed by three spaces."""
