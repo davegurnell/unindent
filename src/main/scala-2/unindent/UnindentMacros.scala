@@ -74,8 +74,7 @@ class UnindentMacros(val c: Context) {
         }
 
         // Remove non-consecutive newlines:
-        ans = newlinesRegex.replaceAllIn(ans, (m: Regex.Match) =>
-          if (m.group(0).length == 1) " " else "\n" * (m.group(0).length - 1))
+        ans = newlinesRegex.replaceAllIn(ans, (m: Regex.Match) => if (m.group(0).length == 1) " " else "\n" * (m.group(0).length - 1))
 
         ans
       }
