@@ -50,7 +50,7 @@ git.gitUncommittedChanges := git.gitCurrentTags.value.isEmpty // Put "-SNAPSHOT"
 
 // Github Actions -------------------------------
 
-ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.11")
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("11"))
 
 // Publishing -----------------------------------
 
