@@ -8,7 +8,7 @@ name := "unindent"
 
 ThisBuild / scalaVersion := "3.3.1"
 
-ThisBuild / crossScalaVersions := Seq("3.3.1", "2.13.12", "2.12.18")
+ThisBuild / crossScalaVersions := Seq("3.3.1", "2.13.12", "2.12.19")
 
 ThisBuild / scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
