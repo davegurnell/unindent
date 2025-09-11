@@ -34,11 +34,11 @@ ThisBuild / libraryDependencies ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, _)) =>
       Seq(
-        "org.scalameta" %% "munit"         % "1.0.2" % Test,
+        "org.scalameta" %% "munit"         % "1.0.4" % Test,
         "org.scala-lang" % "scala-reflect" % scalaVersion.value
       )
     case _ =>
-      Seq("org.scalameta" %% "munit" % "1.0.2" % Test)
+      Seq("org.scalameta" %% "munit" % "1.0.4" % Test)
   }
 }
 
