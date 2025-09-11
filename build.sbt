@@ -6,9 +6,9 @@ enablePlugins(GitBranchPrompt)
 organization := "com.davegurnell"
 name := "unindent"
 
-ThisBuild / scalaVersion := "3.3.3"
+ThisBuild / scalaVersion := "3.3.6"
 
-ThisBuild / crossScalaVersions := Seq("3.3.3", "2.13.14", "2.12.20")
+ThisBuild / crossScalaVersions := Seq("3.3.6", "2.13.16", "2.12.20")
 
 ThisBuild / scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
@@ -34,11 +34,11 @@ ThisBuild / libraryDependencies ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, _)) =>
       Seq(
-        "org.scalameta" %% "munit"         % "1.0.2" % Test,
+        "org.scalameta" %% "munit"         % "1.0.4" % Test,
         "org.scala-lang" % "scala-reflect" % scalaVersion.value
       )
     case _ =>
-      Seq("org.scalameta" %% "munit" % "1.0.2" % Test)
+      Seq("org.scalameta" %% "munit" % "1.0.4" % Test)
   }
 }
 
